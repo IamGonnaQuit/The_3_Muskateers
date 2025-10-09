@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 2804154727628222872}
   - component: {fileID: 368738679902474984}
   - component: {fileID: 6505458788013567340}
+  - component: {fileID: -4273471995241371931}
   m_Layer: 0
   m_Name: Black Potion
   m_TagString: Substance
@@ -594,6 +595,20 @@ MonoBehaviour:
   potionData: {fileID: 11400000, guid: be0dc11f679b0bf4b9101884c159ad05, type: 2}
   targetRenderers:
   - {fileID: 2948843591439004062}
+--- !u!114 &-4273471995241371931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746387868534592642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844cfabb1a36ec84c8dd5e690de6d740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8983833909420079769
 GameObject:
   m_ObjectHideFlags: 0

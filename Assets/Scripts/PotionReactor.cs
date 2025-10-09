@@ -48,7 +48,7 @@ public class PotionReactor : MonoBehaviour
         if (hasSpawnedResult)
             return;
 
-        // 🔸 Modern XR API
+        // Get the objects currently in the sockets
         var targetA = inputSocketA.GetOldestInteractableSelected()?.transform;
         var targetB = inputSocketB.GetOldestInteractableSelected()?.transform;
 
@@ -61,9 +61,15 @@ public class PotionReactor : MonoBehaviour
         if (potionA == null || potionB == null)
             return;
 
+        // Get resulting potion data
         PotionData resultData = potionA.potionData.GetMixResult(potionB.potionData);
 
+        // Spawn the result
         SpawnResultPotion(resultData);
+
+        // Remove input potions
+        DestroyInputPotion(targetA.gameObject, inputSocketA);
+        DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
     private void SpawnResultPotion(PotionData resultData)
@@ -77,16 +83,49 @@ public class PotionReactor : MonoBehaviour
         if (potion != null)
         {
             potion.potionData = resultData;
-            potion.ApplyMaterial(); // now public
+            potion.ApplyMaterial();
         }
 
         hasSpawnedResult = true;
     }
 
+    private void DestroyInputPotion(GameObject potionObject, XRSocketInteractor socket)
+    {
+        if (potionObject == null || socket == null)
+            return;
+
+        BasePotion basePotion = potionObject.GetComponent<BasePotion>();
+
+        // If this is a base potion, respawn it before destruction
+        if (basePotion != null && basePotion.prefabReference != null)
+        {
+            BasePotionManager.Instance.RespawnBasePotion(
+                basePotion.prefabReference,
+                basePotion.originalPosition,
+                basePotion.originalRotation
+            );
+        }
+
+        // Release from socket if necessary
+        if (socket.hasSelection)
+        {
+            var interactable = socket.GetOldestInteractableSelected();
+            if (interactable != null)
+            {
+                socket.interactionManager.SelectExit(socket, interactable);
+            }
+        }
+
+        Destroy(potionObject);
+    }
+
+
+
     private void ClearResult()
     {
         hasSpawnedResult = false;
 
+        // Destroy any result potion in the output slot
         foreach (Transform child in outputSpawnPoint)
         {
             DestroyImmediate(child.gameObject);

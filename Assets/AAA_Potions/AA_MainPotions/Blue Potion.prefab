@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 6520808109815384893}
   - component: {fileID: 3514753918066442464}
   - component: {fileID: 2958941498770039329}
+  - component: {fileID: -205046080311447610}
   m_Layer: 0
   m_Name: Blue Potion
   m_TagString: Substance
@@ -368,6 +369,20 @@ MonoBehaviour:
   potionData: {fileID: 11400000, guid: e07c3a5ed7265a74f81ca194eb11e64c, type: 2}
   targetRenderers:
   - {fileID: 2247258061642577564}
+--- !u!114 &-205046080311447610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588802447256043558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844cfabb1a36ec84c8dd5e690de6d740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3947475964703887872
 GameObject:
   m_ObjectHideFlags: 0

@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 2137760801099818840}
   - component: {fileID: 6093901110402411911}
   - component: {fileID: 3374789341629197923}
+  - component: {fileID: -7848562804637748097}
   m_Layer: 0
   m_Name: Slop Potion
   m_TagString: Substance
@@ -648,3 +649,17 @@ MonoBehaviour:
   potionData: {fileID: 11400000, guid: f2d1c137c3329cc4bb165469719adea1, type: 2}
   targetRenderers:
   - {fileID: 5422590542221060043}
+--- !u!114 &-7848562804637748097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626844063616149549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844cfabb1a36ec84c8dd5e690de6d740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}

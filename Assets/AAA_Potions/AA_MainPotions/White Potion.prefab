@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6154917857141012973}
   - component: {fileID: 5973731568557147424}
   - component: {fileID: 2288176309883250815}
+  - component: {fileID: 3107067185287409129}
   m_Layer: 0
   m_Name: White Potion
   m_TagString: Substance
@@ -232,6 +233,20 @@ MonoBehaviour:
   potionData: {fileID: 11400000, guid: 805e9b5c5e8ce514f99faaa97aeb08f8, type: 2}
   targetRenderers:
   - {fileID: 7584099384412418380}
+--- !u!114 &3107067185287409129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2481734355919379221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844cfabb1a36ec84c8dd5e690de6d740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2935995094928302340
 GameObject:
   m_ObjectHideFlags: 0
