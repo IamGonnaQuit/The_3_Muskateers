@@ -1,10 +1,41 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 [ExecuteAlways] // makes it work in edit mode
 public class Potion : MonoBehaviour
 {
+    [Header("Potion Data")]
     public PotionData potionData;
+
+    [Header("Renderers")]
     public Renderer[] targetRenderers;
+
+    private XRGrabInteractable grabInteractable;
+
+    private void Awake()
+    {
+        // Try to get the XRGrabInteractable on this object
+        grabInteractable = GetComponent<XRGrabInteractable>();
+
+        // Only hook into events at runtime
+        if (Application.isPlaying && grabInteractable != null)
+        {
+            grabInteractable.selectEntered.AddListener(OnGrab);
+            grabInteractable.selectExited.AddListener(OnRelease);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Clean up event listeners
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnGrab);
+            grabInteractable.selectExited.RemoveListener(OnRelease);
+        }
+    }
 
     private void Start()
     {
@@ -42,6 +73,18 @@ public class Potion : MonoBehaviour
             else if (r.sharedMaterial.HasProperty("_Color"))
                 r.sharedMaterial.color = potionData.potionColor;
         }
+    }
+
+    // --- XR Event Handlers ---
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        if (potionData != null)
+            PotionNameUI.Instance?.ShowPotionName(potionData.potionName, args.interactorObject as XRBaseInteractor);
+    }
+
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
     }
 
 }

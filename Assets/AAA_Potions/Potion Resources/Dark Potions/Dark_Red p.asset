@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
   m_Name: Dark_Red p
   m_EditorClassIdentifier: 
-  potionName: Dark Red
+  potionName: Dark Red Potion
   potionColor: {r: 0.54901963, g: 0.1471145, b: 0.10196076, a: 1}
   potionMaterial: {fileID: 2100000, guid: 43e37821c80aa3b499f96c6412726fd4, type: 2}
   mixRecipes: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
   m_Name: Green P
   m_EditorClassIdentifier: 
-  potionName: Green
+  potionName: Green Potion
   potionColor: {r: 0.17453715, g: 0.72327036, b: 0.14783823, a: 1}
   potionMaterial: {fileID: 2100000, guid: 0d81c0d2a1cb0ef41917a6e9f0d17828, type: 2}
   mixRecipes: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
   m_Name: Purple P
   m_EditorClassIdentifier: 
-  potionName: Purple
+  potionName: Purple Potion
   potionColor: {r: 0.49056602, g: 0.072505, b: 0.34423274, a: 1}
   potionMaterial: {fileID: 2100000, guid: 3a542f1e333056a4588d1acb1f76623a, type: 2}
   mixRecipes: []
