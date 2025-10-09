@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
+  m_Name: Grey P
+  m_EditorClassIdentifier: 
+  potionName: Grey
+  potionColor: {r: 0.42767292, g: 0.42767292, b: 0.42767292, a: 1}
+  potionMaterial: {fileID: 2100000, guid: 286898eade999c34d8e0e0e82769fe5b, type: 2}
+  mixRecipes: []
+  defaultMixResult: {fileID: 0}

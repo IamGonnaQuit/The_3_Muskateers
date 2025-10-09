@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
+  m_Name: Red P
+  m_EditorClassIdentifier: 
+  potionName: Red potion
+  potionColor: {r: 0.81761, g: 0.12084167, b: 0.12084167, a: 1}
+  potionMaterial: {fileID: 2100000, guid: 8ac427e0692e85e408ad13886f4dffee, type: 2}
+  mixRecipes:
+  - otherPotion: {fileID: 11400000, guid: e07c3a5ed7265a74f81ca194eb11e64c, type: 2}
+    resultPotion: {fileID: 11400000, guid: 87e7cf52e44cc2240a2cdc4e3d2ab6ba, type: 2}
+  - otherPotion: {fileID: 11400000, guid: ea886635738f1b94585b52246d180407, type: 2}
+    resultPotion: {fileID: 11400000, guid: c0020ed30e7f6964192a58567d7acfeb, type: 2}
+  - otherPotion: {fileID: 11400000, guid: 805e9b5c5e8ce514f99faaa97aeb08f8, type: 2}
+    resultPotion: {fileID: 11400000, guid: b95db32bdc474344caa0a4b334a3f8ff, type: 2}
+  - otherPotion: {fileID: 11400000, guid: be0dc11f679b0bf4b9101884c159ad05, type: 2}
+    resultPotion: {fileID: 11400000, guid: 8e24c2bf30914874791b355a39fbea77, type: 2}
+  defaultMixResult: {fileID: 11400000, guid: f2d1c137c3329cc4bb165469719adea1, type: 2}

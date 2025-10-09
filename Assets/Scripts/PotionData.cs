@@ -1,5 +1,4 @@
-using UnityEngine;
-
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPotionData", menuName = "Potions/Potion Data")]
 public class PotionData : ScriptableObject
@@ -8,15 +7,31 @@ public class PotionData : ScriptableObject
     public string potionName = "New Potion";
     public Color potionColor = Color.white;
 
-    [Header("Which other potions this can interact with")]
-    public PotionData[] compatibleWith;
+    [Header("Visual")]
+    public Material potionMaterial;
 
-    // Small helper to check compatibility in code
-    public bool IsCompatibleWith(PotionData other)
+    [Header("Mixing Recipes")]
+    public Recipe[] mixRecipes;
+    public PotionData defaultMixResult;
+
+    [System.Serializable]
+    public struct Recipe
     {
-        if (other == null || compatibleWith == null) return false;
-        for (int i = 0; i < compatibleWith.Length; i++)
-            if (compatibleWith[i] == other) return true;
-        return false;
+        public PotionData otherPotion;
+        public PotionData resultPotion;
+    }
+
+    public PotionData GetMixResult(PotionData other)
+    {
+        if (other == null)
+            return defaultMixResult;
+
+        foreach (var recipe in mixRecipes)
+        {
+            if (recipe.otherPotion == other)
+                return recipe.resultPotion;
+        }
+
+        return defaultMixResult;
     }
 }

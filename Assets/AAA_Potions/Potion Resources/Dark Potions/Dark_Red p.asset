@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
-  m_Name: Red P
+  m_Name: Dark_Red p
   m_EditorClassIdentifier: 
-  potionName: Red potion
-  potionColor: {r: 0.81761, g: 0.12084167, b: 0.12084167, a: 1}
-  compatibleWith:
-  - {fileID: 11400000, guid: e07c3a5ed7265a74f81ca194eb11e64c, type: 2}
-  - {fileID: 0}
+  potionName: Dark Red
+  potionColor: {r: 0.54901963, g: 0.1471145, b: 0.10196076, a: 1}
+  potionMaterial: {fileID: 2100000, guid: 43e37821c80aa3b499f96c6412726fd4, type: 2}
+  mixRecipes: []
+  defaultMixResult: {fileID: 0}
