@@ -22,7 +22,7 @@ public class Potion : MonoBehaviour
     }
 #endif
 
-    private void ApplyMaterial()
+    public void ApplyMaterial()
     {
         if (potionData == null)
             return;
@@ -34,21 +34,14 @@ public class Potion : MonoBehaviour
         {
             if (r == null) continue;
 
-            // Don’t overwrite prefab materials unless needed
             if (potionData.potionMaterial != null && r.sharedMaterial != potionData.potionMaterial)
                 r.sharedMaterial = potionData.potionMaterial;
 
-            // Apply tint color if your material supports it
             if (r.sharedMaterial.HasProperty("_BaseColor"))
                 r.sharedMaterial.SetColor("_BaseColor", potionData.potionColor);
             else if (r.sharedMaterial.HasProperty("_Color"))
                 r.sharedMaterial.color = potionData.potionColor;
         }
-
-#if UNITY_EDITOR
-        // Mark object dirty so Unity refreshes it in the Scene view
-        if (!Application.isPlaying)
-            UnityEditor.EditorUtility.SetDirty(gameObject);
-#endif
     }
+
 }
