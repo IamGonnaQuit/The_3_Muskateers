@@ -5,6 +5,7 @@ public class PotionData : ScriptableObject
 {
     [Header("Identity")]
     public string potionName = "New Potion";
+    public string potionTags = "Tags here";
     public Color potionColor = Color.white;
 
     [Header("Visual")]
