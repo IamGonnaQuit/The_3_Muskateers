@@ -3,7 +3,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-[ExecuteAlways] // makes it work in edit mode
+[ExecuteAlways]
+[RequireComponent(typeof(XRGrabInteractable))]
 public class Potion : MonoBehaviour
 {
     [Header("Potion Data")]
@@ -12,14 +13,17 @@ public class Potion : MonoBehaviour
     [Header("Renderers")]
     public Renderer[] targetRenderers;
 
+    [Header("Optional Overrides")]
+    public Material overrideMaterial; // optional local override
+
     private XRGrabInteractable grabInteractable;
+    private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
 
     private void Awake()
     {
-        // Try to get the XRGrabInteractable on this object
         grabInteractable = GetComponent<XRGrabInteractable>();
 
-        // Only hook into events at runtime
+        // Hook up runtime events only while playing
         if (Application.isPlaying && grabInteractable != null)
         {
             grabInteractable.selectEntered.AddListener(OnGrab);
@@ -29,8 +33,17 @@ public class Potion : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Clean up event listeners
         if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnGrab);
+            grabInteractable.selectExited.RemoveListener(OnRelease);
+        }
+    }
+
+    // In case of domain reload or disable we unsubscribe
+    private void OnDisable()
+    {
+        if (Application.isPlaying && grabInteractable != null)
         {
             grabInteractable.selectEntered.RemoveListener(OnGrab);
             grabInteractable.selectExited.RemoveListener(OnRelease);
@@ -39,7 +52,6 @@ public class Potion : MonoBehaviour
 
     private void Start()
     {
-        // Still run at runtime
         if (Application.isPlaying)
             ApplyMaterial();
     }
@@ -47,7 +59,6 @@ public class Potion : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        // Runs in the editor whenever you change something in the inspector
         if (!Application.isPlaying)
             ApplyMaterial();
     }
@@ -65,13 +76,23 @@ public class Potion : MonoBehaviour
         {
             if (r == null) continue;
 
-            if (potionData.potionMaterial != null && r.sharedMaterial != potionData.potionMaterial)
-                r.sharedMaterial = potionData.potionMaterial;
+            // determine material to apply: override -> potionData -> don't change
+            Material matToApply = overrideMaterial != null ? overrideMaterial : potionData.potionMaterial;
 
-            if (r.sharedMaterial.HasProperty("_BaseColor"))
-                r.sharedMaterial.SetColor("_BaseColor", potionData.potionColor);
-            else if (r.sharedMaterial.HasProperty("_Color"))
-                r.sharedMaterial.color = potionData.potionColor;
+            if (matToApply != null && r.sharedMaterial != matToApply)
+            {
+                r.sharedMaterial = matToApply;
+            }
+
+            // Try to tint via property if available (uses sharedMaterial)
+            var shared = r.sharedMaterial;
+            if (shared != null)
+            {
+                if (shared.HasProperty(BaseColorId))
+                    shared.SetColor(BaseColorId, potionData.potionColor);
+                else if (shared.HasProperty("_Color"))
+                    shared.SetColor("_Color", potionData.potionColor);
+            }
         }
     }
 
@@ -86,5 +107,4 @@ public class Potion : MonoBehaviour
     {
         PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
     }
-
 }

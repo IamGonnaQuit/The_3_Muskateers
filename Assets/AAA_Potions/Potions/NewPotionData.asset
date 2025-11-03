@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: NewPotionData
   m_EditorClassIdentifier: 
   potionName: New Potion
-  potionTags: Tags here
-  potionColor: {r: 1, g: 1, b: 1, a: 1}
+  potionTags:
+  - {fileID: 11400000, guid: 1daacf11ec2aada4bbfa95a19b577954, type: 2}
+  - {fileID: 0}
+  potionDescription: 
   potionMaterial: {fileID: 0}
+  potionColor: {r: 1, g: 1, b: 1, a: 1}
+  potionPrefab: {fileID: 0}
   mixRecipes: []
   defaultMixResult: {fileID: 0}
