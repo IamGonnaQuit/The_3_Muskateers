@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Anchor
   - Substance
-  - Potion
   layers:
   - Default
   - TransparentFX
@@ -16,7 +15,7 @@ TagManager:
   - UI
   - MainCamera
   - grab ignore
-  - Potion
+  - 
   - 
   - 
   - 

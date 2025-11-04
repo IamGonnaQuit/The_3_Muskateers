@@ -11,6 +11,10 @@ public class PotionReactor : MonoBehaviour
     [Tooltip("Where the resulting potion will appear.")]
     public Transform outputSpawnPoint;
 
+    [Header("Result Prefab")]
+    [Tooltip("The prefab to spawn when the two input potions are mixed.")]
+    public GameObject resultPotionPrefab;
+
     private bool hasSpawnedResult = false;
 
     private void OnEnable()
@@ -29,51 +33,55 @@ public class PotionReactor : MonoBehaviour
         inputSocketB.selectExited.RemoveListener(OnSocketChanged);
     }
 
-    private void OnSocketChanged(SelectEnterEventArgs args) => TryMixPotions();
-    private void OnSocketChanged(SelectExitEventArgs args) => ClearResult();
+    private void OnSocketChanged(SelectEnterEventArgs args)
+    {
+        TryMixPotions();
+    }
+
+    private void OnSocketChanged(SelectExitEventArgs args)
+    {
+        ClearResult();
+    }
 
     private void TryMixPotions()
     {
-        if (hasSpawnedResult) return;
+        if (hasSpawnedResult)
+            return;
 
-        // Get the objects in the sockets
+        // Get the objects currently in the sockets
         var targetA = inputSocketA.GetOldestInteractableSelected()?.transform;
         var targetB = inputSocketB.GetOldestInteractableSelected()?.transform;
-        if (targetA == null || targetB == null) return;
 
-        // Get Potion components
-        Potion potionA = targetA.GetComponent<Potion>();
-        Potion potionB = targetB.GetComponent<Potion>();
-        if (potionA == null || potionB == null) return;
+        if (targetA == null || targetB == null)
+            return;
 
-        // Check if both have valid PotionData
-        if (potionA.potionData == null || potionB.potionData == null) return;
+        // Optional: check that both are potions
+        if (targetA.GetComponent<Potion>() == null || targetB.GetComponent<Potion>() == null)
+            return;
 
-        // Get the resulting PotionData from the recipe
-        PotionData resultData = potionA.potionData.GetMixResult(potionB.potionData);
-        if (resultData == null || resultData.wholePotionPrefab == null) return;
-
-        // Spawn the resulting potion prefab
-        SpawnResultPotion(resultData.wholePotionPrefab);
+        // Spawn the result
+        SpawnResultPotion();
 
         // Remove input potions
         DestroyInputPotion(targetA.gameObject, inputSocketA);
         DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
-    private void SpawnResultPotion(GameObject resultPrefab)
+    private void SpawnResultPotion()
     {
-        if (resultPrefab == null || outputSpawnPoint == null) return;
+        if (resultPotionPrefab == null || outputSpawnPoint == null)
+            return;
 
-        Instantiate(resultPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
+        Instantiate(resultPotionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
         hasSpawnedResult = true;
     }
 
     private void DestroyInputPotion(GameObject potionObject, XRSocketInteractor socket)
     {
-        if (potionObject == null || socket == null) return;
+        if (potionObject == null || socket == null)
+            return;
 
-        // Respawn base potion if applicable
+        // Optional: if you have a BasePotion system to respawn base potions
         BasePotion basePotion = potionObject.GetComponent<BasePotion>();
         if (basePotion != null && basePotion.prefabReference != null)
         {
@@ -89,7 +97,9 @@ public class PotionReactor : MonoBehaviour
         {
             var interactable = socket.GetOldestInteractableSelected();
             if (interactable != null)
+            {
                 socket.interactionManager.SelectExit(socket, interactable);
+            }
         }
 
         Destroy(potionObject);
@@ -99,10 +109,13 @@ public class PotionReactor : MonoBehaviour
     {
         hasSpawnedResult = false;
 
+        // Destroy any result potion in the output slot
         if (outputSpawnPoint != null)
         {
             foreach (Transform child in outputSpawnPoint)
+            {
                 DestroyImmediate(child.gameObject);
+            }
         }
     }
 }
