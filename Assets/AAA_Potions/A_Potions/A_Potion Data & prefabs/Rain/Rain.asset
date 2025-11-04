@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1daacf11ec2aada4bbfa95a19b577954, type: 2}
   - {fileID: 11400000, guid: 046b70493a1bcea41bc8a5f913110cb9, type: 2}
   - {fileID: 11400000, guid: 9698a7f8388f89744bda6da84a767a59, type: 2}
-  potionDescription: 
+  potionDescription: Stable with potential of wind and healing
   potionMaterial: {fileID: 2100000, guid: 7278278b0a2dcea42a98f111ed092c4f, type: 2}
   potionColor: {r: 0.44313726, g: 0.7075576, b: 0.91764706, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: f415cabee8b5af04fbf5f5d8b32a7aee, type: 2}
     resultPotion: {fileID: 11400000, guid: 124e412b4b7f581408d544b0837ef270, type: 2}
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}

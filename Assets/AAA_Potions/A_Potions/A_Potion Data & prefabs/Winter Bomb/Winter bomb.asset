@@ -16,10 +16,11 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: da9007499a56fd2429b43b7175e00cfe, type: 2}
   - {fileID: 11400000, guid: 2079b7d74aa800548a5735312b14995b, type: 2}
-  potionDescription: 
+  potionDescription: Spent
   potionMaterial: {fileID: 2100000, guid: 818eb8081f7b9744bb4b85a02588c8ea, type: 2}
   potionColor: {r: 0.1761797, g: 0.2917593, b: 0.42767292, a: 1}
   wholePotionPrefab: {fileID: 0}
   brokenPotionPrefab: {fileID: 0}
   mixRecipes: []
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
+  floorSplashPrefab: {fileID: 0}

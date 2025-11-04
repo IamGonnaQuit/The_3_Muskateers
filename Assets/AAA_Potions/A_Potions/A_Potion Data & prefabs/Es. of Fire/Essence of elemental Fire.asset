@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: e49a4cf0cead38747a4b772b769d8480, type: 2}
   - {fileID: 11400000, guid: 96f46fe680727ff41807dd9e183b68c1, type: 2}
-  potionDescription: Extracted pure fire from the core of the earth
+  potionDescription: Pure fire from the core of the earth
   potionMaterial: {fileID: 2100000, guid: 2582e5b835c9b8644a52999e373bcf60, type: 2}
   potionColor: {r: 0.8235294, g: 0.25842875, b: 0.07058823, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 5924e6511de39f84bad13012b34f109a, type: 2}
     resultPotion: {fileID: 11400000, guid: ec3f860e6f0c38d478a52c85bc380b9a, type: 2}
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}

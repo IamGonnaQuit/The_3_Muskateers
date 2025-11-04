@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: 046b70493a1bcea41bc8a5f913110cb9, type: 2}
   - {fileID: 11400000, guid: e49a4cf0cead38747a4b772b769d8480, type: 2}
-  potionDescription: Extracted and stabilized essence of purified elemental water.
+  potionDescription: Stabilized essence of purified elemental water.
   potionMaterial: {fileID: 2100000, guid: 8f97e90546d502549bcdc6df94fe6ce9, type: 2}
   potionColor: {r: 0.26041287, g: 0.5588424, b: 0.836478, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 8bed2094dc608f94cbc4566832543ba1, type: 2}
     resultPotion: {fileID: 11400000, guid: b1dc9e99c7d62c442811b3f9445497fe, type: 2}
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}

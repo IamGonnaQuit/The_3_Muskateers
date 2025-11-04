@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: 53589bd558310544fa8aed54491978ae, type: 2}
   - {fileID: 11400000, guid: 96f46fe680727ff41807dd9e183b68c1, type: 2}
-  potionDescription: 
+  potionDescription: Its a bomb
   potionMaterial: {fileID: 2100000, guid: 3284c3df873e25444bc27bbde7fc72d0, type: 2}
   potionColor: {r: 0.050314426, g: 0.050314426, b: 0.050314426, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 2fd0be470f0a0ca4f98eeb5a61b783c7, type: 2}
     resultPotion: {fileID: 11400000, guid: e0943e3ff4df8b44f9f8cd499162280c, type: 2}
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
+  floorSplashPrefab: {fileID: 0}

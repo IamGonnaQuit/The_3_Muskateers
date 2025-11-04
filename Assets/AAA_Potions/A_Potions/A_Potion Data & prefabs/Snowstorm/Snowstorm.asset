@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: 53589bd558310544fa8aed54491978ae, type: 2}
   - {fileID: 11400000, guid: 046b70493a1bcea41bc8a5f913110cb9, type: 2}
-  potionDescription: 
+  potionDescription: Unstable with potential for destruction
   potionMaterial: {fileID: 2100000, guid: b3a41620e73df824090ea65aad79ca13, type: 2}
   potionColor: {r: 0.36996153, g: 0.5407678, b: 0.59119487, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 2fd0be470f0a0ca4f98eeb5a61b783c7, type: 2}
     resultPotion: {fileID: 11400000, guid: e0943e3ff4df8b44f9f8cd499162280c, type: 2}
   defaultMixResult: {fileID: 11400000, guid: 17369f0f60da913408b192bb7abbb89d, type: 2}
+  floorSplashPrefab: {fileID: 0}

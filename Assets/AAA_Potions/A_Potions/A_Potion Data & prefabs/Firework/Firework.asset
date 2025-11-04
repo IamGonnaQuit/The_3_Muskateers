@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1daacf11ec2aada4bbfa95a19b577954, type: 2}
   - {fileID: 11400000, guid: 96f46fe680727ff41807dd9e183b68c1, type: 2}
   - {fileID: 11400000, guid: 9698a7f8388f89744bda6da84a767a59, type: 2}
-  potionDescription: 
+  potionDescription: Stable, could erupt
   potionMaterial: {fileID: 2100000, guid: 6d057afe212fd084a9a124356312da86, type: 2}
   potionColor: {r: 0.509434, g: 0.20355329, b: 0.13296545, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -26,3 +26,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: ec3f860e6f0c38d478a52c85bc380b9a, type: 2}
     resultPotion: {fileID: 11400000, guid: a40a55ce586688c439b545c0b9b40295, type: 2}
   defaultMixResult: {fileID: 11400000, guid: cd3e9056ebf42d54fb55cf0f70e0dc16, type: 2}
+  floorSplashPrefab: {fileID: 0}

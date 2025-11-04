@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: 2079b7d74aa800548a5735312b14995b, type: 2}
   - {fileID: 11400000, guid: 5c7e44e28b3bf464eb737d6d37247944, type: 2}
-  potionDescription: 
+  potionDescription: Spent substance. This can go any further
   potionMaterial: {fileID: 2100000, guid: a7a3e9558589ba94fa2672698c4936b8, type: 2}
   potionColor: {r: 0.23823814, g: 0.21039513, b: 0.33962262, a: 1}
   wholePotionPrefab: {fileID: 0}

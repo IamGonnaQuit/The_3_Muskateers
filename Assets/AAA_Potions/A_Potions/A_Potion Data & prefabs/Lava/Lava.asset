@@ -16,7 +16,7 @@ MonoBehaviour:
   potionTags:
   - {fileID: 11400000, guid: da9007499a56fd2429b43b7175e00cfe, type: 2}
   - {fileID: 11400000, guid: 046b70493a1bcea41bc8a5f913110cb9, type: 2}
-  potionDescription: 
+  potionDescription: What would happened if rapidly cooled?
   potionMaterial: {fileID: 2100000, guid: c1694501440a3f548bbd61e114548c52, type: 2}
   potionColor: {r: 0.45911938, g: 0.105395265, b: 0.105395265, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -25,3 +25,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: e853e0065cd78844dbcd96503bccdd95, type: 2}
     resultPotion: {fileID: 11400000, guid: e662c3a9c1efe6b4f95f4d170d64f243, type: 2}
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}

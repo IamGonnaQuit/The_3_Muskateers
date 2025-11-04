@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9698a7f8388f89744bda6da84a767a59, type: 2}
   - {fileID: 11400000, guid: da9007499a56fd2429b43b7175e00cfe, type: 2}
   - {fileID: 11400000, guid: 046b70493a1bcea41bc8a5f913110cb9, type: 2}
-  potionDescription: 
+  potionDescription: Stable, could become hot or cold
   potionMaterial: {fileID: 2100000, guid: 2f1386a17a2bfa04586f9aa25d669954, type: 2}
   potionColor: {r: 0.109370574, g: 0.41331968, b: 0.44025147, a: 1}
   wholePotionPrefab: {fileID: 0}
@@ -28,3 +28,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 17369f0f60da913408b192bb7abbb89d, type: 2}
     resultPotion: {fileID: 11400000, guid: 5b19df8f1705bbd46b2f459cf6cc2466, type: 2}
   defaultMixResult: {fileID: 11400000, guid: e853e0065cd78844dbcd96503bccdd95, type: 2}
+  floorSplashPrefab: {fileID: 0}
