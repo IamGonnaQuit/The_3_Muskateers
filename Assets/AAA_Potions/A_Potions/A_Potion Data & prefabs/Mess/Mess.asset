@@ -18,7 +18,8 @@ MonoBehaviour:
   potionDescription: This substance appears to be broken beyond repair
   potionMaterial: {fileID: 2100000, guid: 31ad7d3e895b12b4d84ca8491c7c0bcf, type: 2}
   potionColor: {r: 0.23084217, g: 0.26415092, b: 0.1868992, a: 1}
-  wholePotionPrefab: {fileID: 0}
-  brokenPotionPrefab: {fileID: 0}
+  wholePotionPrefab: {fileID: 919132149155446097, guid: df84b9bbe17605c408da9561c6d1bf82, type: 3}
+  brokenPotionPrefab: {fileID: 8195260692164465326, guid: 8f39895c19179d84c983dbfe9fb438a9, type: 3}
   mixRecipes: []
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}

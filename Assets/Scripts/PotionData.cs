@@ -41,12 +41,20 @@ public class PotionData : ScriptableObject
     /// <summary>
     /// Returns the result of mixing this potion with another.
     /// </summary>
+    /// <summary>
+    /// Returns the result of mixing this potion with another.
+    /// </summary>
     public PotionData GetMixResult(PotionData other)
     {
         if (other == null) return defaultMixResult;
+
         foreach (var recipe in mixRecipes)
+        {
             if (recipe.otherPotion == other)
+            {
                 return recipe.resultPotion;
+            }
+        }
         return defaultMixResult;
     }
 

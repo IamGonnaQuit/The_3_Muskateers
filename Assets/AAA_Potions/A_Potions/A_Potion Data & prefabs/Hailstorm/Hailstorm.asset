@@ -20,11 +20,12 @@ MonoBehaviour:
   potionDescription: 
   potionMaterial: {fileID: 2100000, guid: 2f1386a17a2bfa04586f9aa25d669954, type: 2}
   potionColor: {r: 0.109370574, g: 0.41331968, b: 0.44025147, a: 1}
-  wholePotionPrefab: {fileID: 0}
-  brokenPotionPrefab: {fileID: 0}
+  wholePotionPrefab: {fileID: 4563589112315941502, guid: d06b03fb02eca6641a72ebcc96275f5b, type: 3}
+  brokenPotionPrefab: {fileID: 919132149155446097, guid: 84acacd70db27a3438127d049b6feb53, type: 3}
   mixRecipes:
   - otherPotion: {fileID: 11400000, guid: f1888b120f543a04f82d8bc71de03033, type: 2}
     resultPotion: {fileID: 11400000, guid: 7e0ceb92c19e44048bd26f26fc0e4320, type: 2}
   - otherPotion: {fileID: 11400000, guid: 17369f0f60da913408b192bb7abbb89d, type: 2}
     resultPotion: {fileID: 11400000, guid: 5b19df8f1705bbd46b2f459cf6cc2466, type: 2}
   defaultMixResult: {fileID: 11400000, guid: e853e0065cd78844dbcd96503bccdd95, type: 2}
+  floorSplashPrefab: {fileID: 0}

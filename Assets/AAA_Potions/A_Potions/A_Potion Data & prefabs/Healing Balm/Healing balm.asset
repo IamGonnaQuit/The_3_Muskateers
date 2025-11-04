@@ -20,11 +20,12 @@ MonoBehaviour:
   potionDescription: Ointment used for medical aid with a potential for flamability
   potionMaterial: {fileID: 2100000, guid: 7c1d38a8655edad43a2a7c03dce57099, type: 2}
   potionColor: {r: 0.28911388, g: 0.7169812, b: 0.28183216, a: 1}
-  wholePotionPrefab: {fileID: 0}
-  brokenPotionPrefab: {fileID: 0}
+  wholePotionPrefab: {fileID: 8195260692164465326, guid: 8f39895c19179d84c983dbfe9fb438a9, type: 3}
+  brokenPotionPrefab: {fileID: 919132149155446097, guid: 432c05f511be13e47bde18ae5d5a632c, type: 3}
   mixRecipes:
   - otherPotion: {fileID: 11400000, guid: b1dc9e99c7d62c442811b3f9445497fe, type: 2}
     resultPotion: {fileID: 11400000, guid: 124e412b4b7f581408d544b0837ef270, type: 2}
   - otherPotion: {fileID: 11400000, guid: cd3e9056ebf42d54fb55cf0f70e0dc16, type: 2}
     resultPotion: {fileID: 11400000, guid: b93abf7ef251f3b4ea3f81085b64197d, type: 2}
   defaultMixResult: {fileID: 11400000, guid: e853e0065cd78844dbcd96503bccdd95, type: 2}
+  floorSplashPrefab: {fileID: 0}

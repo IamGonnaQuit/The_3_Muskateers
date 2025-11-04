@@ -15,60 +15,86 @@ public class PotionReactor : MonoBehaviour
 
     private void OnEnable()
     {
-        inputSocketA.selectEntered.AddListener(OnSocketChanged);
-        inputSocketB.selectEntered.AddListener(OnSocketChanged);
-        inputSocketA.selectExited.AddListener(OnSocketChanged);
-        inputSocketB.selectExited.AddListener(OnSocketChanged);
+        inputSocketA.selectEntered.AddListener(OnSocketEntered);
+        inputSocketB.selectEntered.AddListener(OnSocketEntered);
+        inputSocketA.selectExited.AddListener(OnSocketExited);
+        inputSocketB.selectExited.AddListener(OnSocketExited);
     }
 
     private void OnDisable()
     {
-        inputSocketA.selectEntered.RemoveListener(OnSocketChanged);
-        inputSocketB.selectEntered.RemoveListener(OnSocketChanged);
-        inputSocketA.selectExited.RemoveListener(OnSocketChanged);
-        inputSocketB.selectExited.RemoveListener(OnSocketChanged);
+        inputSocketA.selectEntered.RemoveListener(OnSocketEntered);
+        inputSocketB.selectEntered.RemoveListener(OnSocketEntered);
+        inputSocketA.selectExited.RemoveListener(OnSocketExited);
+        inputSocketB.selectExited.RemoveListener(OnSocketExited);
     }
 
-    private void OnSocketChanged(SelectEnterEventArgs args)
+    private void OnSocketEntered(SelectEnterEventArgs args)
     {
         TryMixPotions();
     }
 
-    private void OnSocketChanged(SelectExitEventArgs args)
+    private void OnSocketExited(SelectExitEventArgs args)
     {
-        ClearResult();
+        // Only clear result when BOTH sockets are empty
+        if (!inputSocketA.hasSelection && !inputSocketB.hasSelection)
+        {
+            ClearResult();
+        }
     }
 
     private void TryMixPotions()
     {
-        if (hasSpawnedResult) return;
+        if (hasSpawnedResult)
+        {
+            Debug.Log("Already has spawned result, waiting for cleanup");
+            return;
+        }
 
         var targetA = inputSocketA.GetOldestInteractableSelected()?.transform;
         var targetB = inputSocketB.GetOldestInteractableSelected()?.transform;
 
-        if (targetA == null || targetB == null) return;
+        Debug.Log($"Checking mix: Socket A has {targetA?.name}, Socket B has {targetB?.name}");
+
+        if (targetA == null || targetB == null)
+        {
+            Debug.Log("One or both sockets are empty");
+            return;
+        }
 
         // Only objects tagged as Potion
-        if (!targetA.CompareTag("Potion") || !targetB.CompareTag("Potion")) return;
+        if (!targetA.CompareTag("Potion") || !targetB.CompareTag("Potion"))
+        {
+            Debug.Log("One or both objects are not potions");
+            return;
+        }
 
         Potion potionA = targetA.GetComponent<Potion>();
         Potion potionB = targetB.GetComponent<Potion>();
 
-        if (potionA == null || potionB == null) return;
-        if (potionA.potionData == null || potionB.potionData == null) return;
-
-        // --- Check recipes ---
-        PotionData resultData = potionA.potionData.GetMixResult(potionB.potionData);
-
-        // If recipe is not found, check the reverse order (make mixing order-independent)
-        if (resultData == potionA.potionData.defaultMixResult)
-            resultData = potionB.potionData.GetMixResult(potionA.potionData);
-
-        if (resultData == null || resultData == potionA.potionData.defaultMixResult)
+        if (potionA == null || potionB == null)
         {
-            Debug.Log("No valid recipe for this combination!");
+            Debug.Log("One or both objects don't have Potion component");
             return;
         }
+        if (potionA.potionData == null || potionB.potionData == null)
+        {
+            Debug.Log("One or both potions missing PotionData");
+            return;
+        }
+
+        Debug.Log($"Attempting to mix: {potionA.potionData.potionName} + {potionB.potionData.potionName}");
+
+        // --- Check recipes ---
+        PotionData resultData = FindMixResult(potionA.potionData, potionB.potionData);
+
+        if (resultData == null)
+        {
+            Debug.Log($"No valid recipe found for {potionA.potionData.potionName} + {potionB.potionData.potionName}");
+            return;
+        }
+
+        Debug.Log($"Recipe found! Result: {resultData.potionName}");
 
         // Spawn the resulting potion
         SpawnResultPotion(resultData);
@@ -78,11 +104,42 @@ public class PotionReactor : MonoBehaviour
         DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
+    private PotionData FindMixResult(PotionData dataA, PotionData dataB)
+    {
+        // Check both directions since mixing should be order-independent
+        PotionData result = dataA.GetMixResult(dataB);
+
+        // If no result or it's the default, check the reverse
+        if (result == null || result == dataA.defaultMixResult)
+        {
+            result = dataB.GetMixResult(dataA);
+        }
+
+        // If still no valid result or it's the other potion's default, return null
+        if (result == null || result == dataB.defaultMixResult)
+        {
+            return null;
+        }
+
+        return result;
+    }
+
     private void SpawnResultPotion(PotionData resultData)
     {
-        if (resultData.wholePotionPrefab == null || outputSpawnPoint == null) return;
+        if (resultData.wholePotionPrefab == null)
+        {
+            Debug.LogError("Result potion prefab is null!");
+            return;
+        }
+
+        if (outputSpawnPoint == null)
+        {
+            Debug.LogError("Output spawn point is null!");
+            return;
+        }
 
         GameObject newPotion = Instantiate(resultData.wholePotionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
+        Debug.Log($"Spawned result potion: {resultData.potionName}");
 
         // Assign PotionData to the spawned object
         Potion potion = newPotion.GetComponent<Potion>();
@@ -130,7 +187,7 @@ public class PotionReactor : MonoBehaviour
         {
             foreach (Transform child in outputSpawnPoint)
             {
-                DestroyImmediate(child.gameObject);
+                Destroy(child.gameObject);
             }
         }
     }

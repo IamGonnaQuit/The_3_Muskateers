@@ -19,7 +19,8 @@ MonoBehaviour:
   potionDescription: 
   potionMaterial: {fileID: 2100000, guid: 06980f7b7c725044e8062972d5d62951, type: 2}
   potionColor: {r: 0.44642922, g: 0.3735413, b: 0.63522005, a: 1}
-  wholePotionPrefab: {fileID: 0}
-  brokenPotionPrefab: {fileID: 0}
+  wholePotionPrefab: {fileID: 8195260692164465326, guid: 8f39895c19179d84c983dbfe9fb438a9, type: 3}
+  brokenPotionPrefab: {fileID: 919132149155446097, guid: 84acacd70db27a3438127d049b6feb53, type: 3}
   mixRecipes: []
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
+  floorSplashPrefab: {fileID: 0}

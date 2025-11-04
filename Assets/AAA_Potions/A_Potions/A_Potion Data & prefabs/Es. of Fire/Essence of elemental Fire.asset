@@ -19,11 +19,12 @@ MonoBehaviour:
   potionDescription: Extracted pure fire from the core of the earth
   potionMaterial: {fileID: 2100000, guid: 2582e5b835c9b8644a52999e373bcf60, type: 2}
   potionColor: {r: 0.8235294, g: 0.25842875, b: 0.07058823, a: 1}
-  wholePotionPrefab: {fileID: 0}
-  brokenPotionPrefab: {fileID: 0}
+  wholePotionPrefab: {fileID: 4563589112315941502, guid: d06b03fb02eca6641a72ebcc96275f5b, type: 3}
+  brokenPotionPrefab: {fileID: 919132149155446097, guid: 84acacd70db27a3438127d049b6feb53, type: 3}
   mixRecipes:
   - otherPotion: {fileID: 11400000, guid: 8bed2094dc608f94cbc4566832543ba1, type: 2}
     resultPotion: {fileID: 11400000, guid: 0e7c2c3248902d146b05221b42ef9ebf, type: 2}
   - otherPotion: {fileID: 11400000, guid: 5924e6511de39f84bad13012b34f109a, type: 2}
     resultPotion: {fileID: 11400000, guid: ec3f860e6f0c38d478a52c85bc380b9a, type: 2}
   defaultMixResult: {fileID: 11400000}
+  floorSplashPrefab: {fileID: 0}
