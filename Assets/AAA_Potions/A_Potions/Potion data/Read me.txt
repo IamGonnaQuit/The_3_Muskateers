@@ -1,0 +1,6 @@
+Read me
+
+Here are folders for each potion, each folder has the scriptable object and material for the potion
+
+to change the material color you change it in the scriptable object and run the game (make sure there is a prefab in the scene of the potion if you wanna actually see changes to the material)
+
