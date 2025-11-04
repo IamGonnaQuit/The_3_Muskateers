@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Grey P
   m_EditorClassIdentifier: 
   potionName: Grey Potion
-  potionColor: {r: 0.42767292, g: 0.42767292, b: 0.42767292, a: 1}
+  potionTags: []
+  potionDescription: 
   potionMaterial: {fileID: 2100000, guid: 286898eade999c34d8e0e0e82769fe5b, type: 2}
+  potionColor: {r: 0.42767292, g: 0.42767292, b: 0.42767292, a: 1}
+  wholePotionPrefab: {fileID: 0}
+  brokenPotionPrefab: {fileID: 0}
   mixRecipes: []
   defaultMixResult: {fileID: 0}
