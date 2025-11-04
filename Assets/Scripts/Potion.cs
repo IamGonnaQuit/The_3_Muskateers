@@ -100,11 +100,15 @@ public class Potion : MonoBehaviour
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (potionData != null)
-            PotionNameUI.Instance?.ShowPotionName(potionData.potionName, args.interactorObject as XRBaseInteractor);
+        {
+            // Old: PotionNameUI.Instance?.ShowPotionName(potionData.potionName, args.interactorObject as XRBaseInteractor);
+            PotionInfoUI.Instance?.ShowPotionInfo(potionData, args.interactorObject as XRBaseInteractor);
+        }
     }
 
     private void OnRelease(SelectExitEventArgs args)
     {
-        PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
+        PotionInfoUI.Instance?.HidePotionInfo(args.interactorObject as XRBaseInteractor);
     }
+
 }
