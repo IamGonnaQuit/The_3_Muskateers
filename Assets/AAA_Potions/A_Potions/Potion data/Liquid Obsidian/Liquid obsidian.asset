@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53589bd558310544fa8aed54491978ae, type: 2}
   potionDescription: 
   potionMaterial: {fileID: 2100000, guid: d2147bba965ba9d4582d2aadf5d583ca, type: 2}
-  potionColor: {r: 0.17711464, g: 0.10581065, b: 0.31446534, a: 1}
+  potionColor: {r: 0.10220512, g: 0.051263765, b: 0.20125782, a: 1}
   wholePotionPrefab: {fileID: 0}
   brokenPotionPrefab: {fileID: 0}
   mixRecipes:

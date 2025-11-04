@@ -2311,6 +2311,8 @@ MonoBehaviour:
   liquidRenderer: {fileID: 1058325182419494065}
   breakSpeedThreshold: 1.5
   potionRigidbody: {fileID: 4960873685533592880}
+  potionParticles: {fileID: 0}
+  useColorForParticles: 1
 --- !u!1 &7868880824934226241
 GameObject:
   m_ObjectHideFlags: 0
