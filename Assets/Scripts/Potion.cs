@@ -10,29 +10,36 @@ public class Potion : MonoBehaviour
     [Header("Potion Data")]
     public PotionData potionData;
 
-    [Header("Renderers")]
-    public Renderer[] targetRenderers;
+    [Header("Potion Models")]
+    public GameObject wholeModel;  // intact model
+    public GameObject brokenModel; // broken/shattered model (disabled initially)
 
-    [Header("Optional Overrides")]
-    public Material overrideMaterial; // optional local override
+    [Header("Liquid Renderer")]
+    [Tooltip("Renderer of the liquid mesh inside the whole potion model")]
+    public Renderer liquidRenderer;
+
+    [Header("Break Settings")]
+    public float breakSpeedThreshold = 1.5f;
+    public Rigidbody potionRigidbody;
 
     private XRGrabInteractable grabInteractable;
-    private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
-
-    // --- Breakable potion features ---
     private bool isBroken = false;
-    public float breakForce = 1.5f; // tweak based on VR physics strength
 
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
 
-        // Hook up runtime events only while playing
+        if (potionRigidbody == null)
+            potionRigidbody = GetComponent<Rigidbody>();
+
         if (Application.isPlaying && grabInteractable != null)
         {
             grabInteractable.selectEntered.AddListener(OnGrab);
             grabInteractable.selectExited.AddListener(OnRelease);
         }
+
+        // Assign material from PotionData
+        ApplyMaterial();
     }
 
     private void OnDestroy()
@@ -55,56 +62,46 @@ public class Potion : MonoBehaviour
 
     private void Start()
     {
-        if (Application.isPlaying)
-            ApplyMaterial();
+        ApplyMaterial();
     }
 
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (!Application.isPlaying)
-            ApplyMaterial();
+        ApplyMaterial();
     }
 #endif
 
+    /// <summary>
+    /// Assigns the material from the PotionData ScriptableObject to the liquid renderer.
+    /// </summary>
     public void ApplyMaterial()
     {
-        if (potionData == null)
-            return;
+        if (potionData == null || liquidRenderer == null) return;
 
-        if (targetRenderers == null || targetRenderers.Length == 0)
-            targetRenderers = GetComponentsInChildren<Renderer>(true);
+        // Assign the material from the SO
+        liquidRenderer.sharedMaterial = potionData.potionMaterial;
 
-        foreach (var r in targetRenderers)
+        // Set base color
+        liquidRenderer.sharedMaterial.color = potionData.potionColor;
+
+        // Set emission color to the same as base
+        if (liquidRenderer.sharedMaterial.HasProperty("_EmissionColor"))
         {
-            if (r == null) continue;
-
-            // determine material to apply: override -> potionData -> don't change
-            Material matToApply = overrideMaterial != null ? overrideMaterial : potionData.potionMaterial;
-
-            if (matToApply != null && r.sharedMaterial != matToApply)
-            {
-                r.sharedMaterial = matToApply;
-            }
-
-            // Try to tint via property if available (uses sharedMaterial)
-            var shared = r.sharedMaterial;
-            if (shared != null)
-            {
-                if (shared.HasProperty(BaseColorId))
-                    shared.SetColor(BaseColorId, potionData.potionColor);
-                else if (shared.HasProperty("_Color"))
-                    shared.SetColor("_Color", potionData.potionColor);
-            }
+            liquidRenderer.sharedMaterial.EnableKeyword("_EMISSION");
+            liquidRenderer.sharedMaterial.SetColor("_EmissionColor", potionData.potionColor);
         }
     }
 
-    // --- XR Event Handlers ---
+
+
+
+
+    // --- XR Grab Events ---
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (potionData != null)
         {
-            // Show both PotionInfoUI and PotionNameUI if needed
             PotionInfoUI.Instance?.ShowPotionInfo(potionData, args.interactorObject as XRBaseInteractor);
             PotionNameUI.Instance?.ShowPotionName(potionData.potionName, args.interactorObject as XRBaseInteractor);
         }
@@ -116,32 +113,39 @@ public class Potion : MonoBehaviour
         PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
     }
 
-    // --- Breakable potion ---
+    // --- Break logic ---
     private void OnCollisionEnter(Collision collision)
     {
         if (isBroken || !Application.isPlaying) return;
 
-        if (collision.relativeVelocity.magnitude > breakForce)
+        if (potionRigidbody != null && potionRigidbody.linearVelocity.magnitude >= breakSpeedThreshold)
         {
             BreakPotion();
         }
     }
 
+    /// <summary>
+    /// Switch from whole to broken model and preserve Rigidbody velocity.
+    /// </summary>
     public void BreakPotion()
     {
+        if (isBroken) return;
         isBroken = true;
 
-        // Spawn broken version if any
-        if (potionData.brokenPotionPrefab != null)
+        if (wholeModel != null) wholeModel.SetActive(false);
+        if (brokenModel != null) brokenModel.SetActive(true);
+
+        // Preserve velocity
+        if (potionRigidbody != null)
         {
-            Instantiate(
-                potionData.brokenPotionPrefab,
-                transform.position,
-                transform.rotation
-            );
+            potionRigidbody.linearVelocity *= 1f;
+            potionRigidbody.angularVelocity *= 1f;
         }
 
-        // Destroy this one
-        Destroy(gameObject);
+        // Disable grab
+        if (grabInteractable != null)
+            grabInteractable.enabled = false;
+
+        // Optional: add particles/sounds here
     }
 }

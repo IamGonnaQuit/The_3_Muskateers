@@ -2140,6 +2140,7 @@ GameObject:
   - component: {fileID: 1135005397846465432}
   - component: {fileID: 8353801994062974675}
   - component: {fileID: 4941882822765308634}
+  - component: {fileID: 663147421300249019}
   m_Layer: 0
   m_Name: Potion Type 1
   m_TagString: Untagged
@@ -2319,6 +2320,24 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
+--- !u!114 &663147421300249019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195260692164465326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46487a2965808949952f60efc7fdb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionData: {fileID: 0}
+  wholeModel: {fileID: 9082345578168610403}
+  brokenModel: {fileID: 4108030350980520057}
+  liquidRenderer: {fileID: 1556338136252865770}
+  breakSpeedThreshold: 1.5
+  potionRigidbody: {fileID: 8353801994062974675}
 --- !u!1 &8563887155076315143
 GameObject:
   m_ObjectHideFlags: 0

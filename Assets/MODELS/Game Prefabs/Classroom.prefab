@@ -629,7 +629,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 224363519535898977}
-  - {fileID: 3487748853870309102}
   - {fileID: 1201044642686425323}
   - {fileID: 2021783451706984842}
   - {fileID: 4554699263772184972}
@@ -749,7 +748,7 @@ GameObject:
   - component: {fileID: 401008288457799073}
   - component: {fileID: 7974238464577092807}
   m_Layer: 0
-  m_Name: door.001
+  m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -763,12 +762,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3924864168942575754}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604645, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.1612071, y: 1.1102773, z: -0.35671878}
-  m_LocalScale: {x: 0.050459262, y: 0.050459266, z: 0.050459266}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2196372, y: -8.861197, z: 2.5169601}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 54066651617575646}
+  m_Father: {fileID: 224363519535898977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &401008288457799073
 MeshFilter:
@@ -2483,7 +2482,7 @@ GameObject:
   - component: {fileID: 8045453886248071868}
   - component: {fileID: 4154456205580537044}
   m_Layer: 0
-  m_Name: door
+  m_Name: Reactor Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2499,9 +2498,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000059604645, y: -0.70710677, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -1.0342032, y: 1.5574068, z: -0.3678015}
-  m_LocalScale: {x: 0.050459262, y: 0.050459266, z: 0.050459266}
+  m_LocalScale: {x: 0.050459262, y: 0.050459262, z: 0.050459262}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3487748853870309102}
   m_Father: {fileID: 54066651617575646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8045453886248071868

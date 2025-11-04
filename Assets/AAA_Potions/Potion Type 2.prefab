@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 563270746994654604}
   - component: {fileID: 6572294286737759531}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 6338358773784215169}
   - component: {fileID: 2518011829225869920}
   m_Layer: 0
-  m_Name: Circle.001
+  m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1769,6 +1769,7 @@ GameObject:
   - component: {fileID: 634909103770683155}
   - component: {fileID: 9030997279109279503}
   - component: {fileID: 8604320346626702167}
+  - component: {fileID: 3827476332288912545}
   m_Layer: 0
   m_Name: Potion Type 2
   m_TagString: Untagged
@@ -1947,6 +1948,24 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
+--- !u!114 &3827476332288912545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290581253874690997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46487a2965808949952f60efc7fdb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potionData: {fileID: 0}
+  wholeModel: {fileID: 4972917619295936044}
+  brokenModel: {fileID: 8789604580626337130}
+  liquidRenderer: {fileID: 6338358773784215169}
+  breakSpeedThreshold: 1.5
+  potionRigidbody: {fileID: 9030997279109279503}
 --- !u!1 &8421943767352174074
 GameObject:
   m_ObjectHideFlags: 0
