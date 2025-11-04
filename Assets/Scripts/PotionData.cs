@@ -7,29 +7,18 @@ public class PotionData : ScriptableObject
     public string potionName = "New Potion";
     public PotionTag[] potionTags;
 
-    [Header("Description")]
+    [Header("Info")]
     [TextArea(3, 6)]
     public string potionDescription;
 
-    [Header("Liquid Visuals")]
-    [Tooltip("Material used for the liquid of this potion.")]
-    public Material potionMaterial;
-
-    [Tooltip("Tint color for the liquid, applied when material is set.")]
+    [Header("Visual")]
+    public Material potionMaterial;      // <-- make sure this exists
     public Color potionColor = Color.white;
-
-    [Header("Prefabs")]
-    [Tooltip("Prefab for the whole/intact potion.")]
-    public GameObject wholePotionPrefab;
-    [Tooltip("Prefab for the broken potion.")]
-    public GameObject brokenPotionPrefab;
+    public GameObject potionPrefab;      // for future 3D preview
 
     [Header("Mixing Recipes")]
     public Recipe[] mixRecipes;
     public PotionData defaultMixResult;
-
-    public GameObject floorSplashPrefab;
-
 
     [System.Serializable]
     public struct Recipe
@@ -38,9 +27,6 @@ public class PotionData : ScriptableObject
         public PotionData resultPotion;
     }
 
-    /// <summary>
-    /// Returns the result of mixing this potion with another.
-    /// </summary>
     public PotionData GetMixResult(PotionData other)
     {
         if (other == null) return defaultMixResult;
@@ -50,9 +36,6 @@ public class PotionData : ScriptableObject
         return defaultMixResult;
     }
 
-    /// <summary>
-    /// Returns true if this potion has the specified tag.
-    /// </summary>
     public bool HasTag(PotionTag tag)
     {
         if (potionTags == null) return false;

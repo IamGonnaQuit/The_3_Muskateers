@@ -12,8 +12,8 @@ public class PotionReactor : MonoBehaviour
     public Transform outputSpawnPoint;
 
     [Header("Result Prefab")]
-    [Tooltip("The prefab to spawn when the two input potions are mixed.")]
-    public GameObject resultPotionPrefab;
+    [Tooltip("Generic potion prefab that has the Potion script.")]
+    public GameObject potionPrefab;
 
     private bool hasSpawnedResult = false;
 
@@ -55,24 +55,37 @@ public class PotionReactor : MonoBehaviour
         if (targetA == null || targetB == null)
             return;
 
-        // Optional: check that both are potions
-        if (targetA.GetComponent<Potion>() == null || targetB.GetComponent<Potion>() == null)
+        Potion potionA = targetA.GetComponent<Potion>();
+        Potion potionB = targetB.GetComponent<Potion>();
+
+        if (potionA == null || potionB == null)
             return;
 
+        // Get resulting potion data
+        PotionData resultData = potionA.potionData.GetMixResult(potionB.potionData);
+
         // Spawn the result
-        SpawnResultPotion();
+        SpawnResultPotion(resultData);
 
         // Remove input potions
         DestroyInputPotion(targetA.gameObject, inputSocketA);
         DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
-    private void SpawnResultPotion()
+    private void SpawnResultPotion(PotionData resultData)
     {
-        if (resultPotionPrefab == null || outputSpawnPoint == null)
+        if (potionPrefab == null || resultData == null)
             return;
 
-        Instantiate(resultPotionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
+        GameObject newPotion = Instantiate(potionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
+        Potion potion = newPotion.GetComponent<Potion>();
+
+        if (potion != null)
+        {
+            potion.potionData = resultData;
+            potion.ApplyMaterial();
+        }
+
         hasSpawnedResult = true;
     }
 
@@ -81,8 +94,9 @@ public class PotionReactor : MonoBehaviour
         if (potionObject == null || socket == null)
             return;
 
-        // Optional: if you have a BasePotion system to respawn base potions
         BasePotion basePotion = potionObject.GetComponent<BasePotion>();
+
+        // If this is a base potion, respawn it before destruction
         if (basePotion != null && basePotion.prefabReference != null)
         {
             BasePotionManager.Instance.RespawnBasePotion(
@@ -105,17 +119,16 @@ public class PotionReactor : MonoBehaviour
         Destroy(potionObject);
     }
 
+
+
     private void ClearResult()
     {
         hasSpawnedResult = false;
 
         // Destroy any result potion in the output slot
-        if (outputSpawnPoint != null)
+        foreach (Transform child in outputSpawnPoint)
         {
-            foreach (Transform child in outputSpawnPoint)
-            {
-                DestroyImmediate(child.gameObject);
-            }
+            DestroyImmediate(child.gameObject);
         }
     }
 }
