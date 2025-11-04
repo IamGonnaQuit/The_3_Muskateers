@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
+  m_Name: Volcano
+  m_EditorClassIdentifier: 
+  potionName: Volcano
+  potionTags:
+  - {fileID: 11400000, guid: 2079b7d74aa800548a5735312b14995b, type: 2}
+  - {fileID: 11400000, guid: 96f46fe680727ff41807dd9e183b68c1, type: 2}
+  - {fileID: 11400000, guid: da9007499a56fd2429b43b7175e00cfe, type: 2}
+  potionDescription: 
+  potionMaterial: {fileID: 0}
+  potionColor: {r: 1, g: 1, b: 1, a: 1}
+  potionPrefab: {fileID: 0}
+  mixRecipes: []
+  defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}

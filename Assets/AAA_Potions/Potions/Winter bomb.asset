@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
-  m_Name: NewPotionData
+  m_Name: Winter bomb
   m_EditorClassIdentifier: 
-  potionName: New Potion
+  potionName: Winter bomb
   potionTags:
-  - {fileID: 11400000, guid: 1daacf11ec2aada4bbfa95a19b577954, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: da9007499a56fd2429b43b7175e00cfe, type: 2}
+  - {fileID: 11400000, guid: 2079b7d74aa800548a5735312b14995b, type: 2}
   potionDescription: 
   potionMaterial: {fileID: 0}
   potionColor: {r: 1, g: 1, b: 1, a: 1}
   potionPrefab: {fileID: 0}
   mixRecipes: []
-  defaultMixResult: {fileID: 0}
+  defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
