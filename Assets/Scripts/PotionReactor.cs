@@ -29,69 +29,43 @@ public class PotionReactor : MonoBehaviour
         inputSocketB.selectExited.RemoveListener(OnSocketChanged);
     }
 
-    private void OnSocketChanged(SelectEnterEventArgs args)
-    {
-        TryMixPotions();
-    }
-
-    private void OnSocketChanged(SelectExitEventArgs args)
-    {
-        ClearResult();
-    }
+    private void OnSocketChanged(SelectEnterEventArgs args) => TryMixPotions();
+    private void OnSocketChanged(SelectExitEventArgs args) => ClearResult();
 
     private void TryMixPotions()
     {
         if (hasSpawnedResult) return;
 
+        // Get the objects in the sockets
         var targetA = inputSocketA.GetOldestInteractableSelected()?.transform;
         var targetB = inputSocketB.GetOldestInteractableSelected()?.transform;
-
         if (targetA == null || targetB == null) return;
 
-        // Only objects tagged as Potion
-        if (!targetA.CompareTag("Potion") || !targetB.CompareTag("Potion")) return;
-
+        // Get Potion components
         Potion potionA = targetA.GetComponent<Potion>();
         Potion potionB = targetB.GetComponent<Potion>();
-
         if (potionA == null || potionB == null) return;
+
+        // Check if both have valid PotionData
         if (potionA.potionData == null || potionB.potionData == null) return;
 
-        // --- Check recipes ---
+        // Get the resulting PotionData from the recipe
         PotionData resultData = potionA.potionData.GetMixResult(potionB.potionData);
+        if (resultData == null || resultData.wholePotionPrefab == null) return;
 
-        // If recipe is not found, check the reverse order (make mixing order-independent)
-        if (resultData == potionA.potionData.defaultMixResult)
-            resultData = potionB.potionData.GetMixResult(potionA.potionData);
+        // Spawn the resulting potion prefab
+        SpawnResultPotion(resultData.wholePotionPrefab);
 
-        if (resultData == null || resultData == potionA.potionData.defaultMixResult)
-        {
-            Debug.Log("No valid recipe for this combination!");
-            return;
-        }
-
-        // Spawn the resulting potion
-        SpawnResultPotion(resultData);
-
-        // Destroy / respawn input potions
+        // Remove input potions
         DestroyInputPotion(targetA.gameObject, inputSocketA);
         DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
-    private void SpawnResultPotion(PotionData resultData)
+    private void SpawnResultPotion(GameObject resultPrefab)
     {
-        if (resultData.wholePotionPrefab == null || outputSpawnPoint == null) return;
+        if (resultPrefab == null || outputSpawnPoint == null) return;
 
-        GameObject newPotion = Instantiate(resultData.wholePotionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
-
-        // Assign PotionData to the spawned object
-        Potion potion = newPotion.GetComponent<Potion>();
-        if (potion != null)
-        {
-            potion.potionData = resultData;
-            potion.ApplyMaterial();
-        }
-
+        Instantiate(resultPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
         hasSpawnedResult = true;
     }
 
@@ -99,6 +73,7 @@ public class PotionReactor : MonoBehaviour
     {
         if (potionObject == null || socket == null) return;
 
+        // Respawn base potion if applicable
         BasePotion basePotion = potionObject.GetComponent<BasePotion>();
         if (basePotion != null && basePotion.prefabReference != null)
         {
@@ -114,9 +89,7 @@ public class PotionReactor : MonoBehaviour
         {
             var interactable = socket.GetOldestInteractableSelected();
             if (interactable != null)
-            {
                 socket.interactionManager.SelectExit(socket, interactable);
-            }
         }
 
         Destroy(potionObject);
@@ -129,9 +102,7 @@ public class PotionReactor : MonoBehaviour
         if (outputSpawnPoint != null)
         {
             foreach (Transform child in outputSpawnPoint)
-            {
                 DestroyImmediate(child.gameObject);
-            }
         }
     }
 }
