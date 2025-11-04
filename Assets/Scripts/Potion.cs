@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -19,7 +19,7 @@ public class Potion : MonoBehaviour
     public Renderer liquidRenderer;
 
     [Header("Break Settings")]
-    public float breakSpeedThreshold = 1.5f;
+    public float breakSpeedThreshold = 1f;
     public Rigidbody potionRigidbody;
 
     private XRGrabInteractable grabInteractable;
@@ -28,6 +28,12 @@ public class Potion : MonoBehaviour
     [Header("Visual Effects")]
     public ParticleSystem potionParticles;
     public bool useColorForParticles = true;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip breakSound;
+    public float breakVolume = 1f;
+
 
     private void Awake()
     {
@@ -135,7 +141,33 @@ public class Potion : MonoBehaviour
             mat.EnableKeyword("_EMISSION");
             mat.SetColor("_EmissionColor", potionData.potionColor);
         }
+
+        // Match particle color
+        ApplyParticleColor();
+
     }
+
+    private void ApplyParticleColor()
+    {
+        if (!useColorForParticles || potionParticles == null || potionData == null)
+            return;
+
+        var main = potionParticles.main;
+        main.startColor = potionData.potionColor;
+
+        // Optional: overbright for magical glow look
+        var emission = potionParticles.emission;
+        emission.rateOverTime = 10f;
+
+        // Set particle material emission if it exists
+        var renderer = potionParticles.GetComponent<ParticleSystemRenderer>();
+        if (renderer != null && renderer.material != null && renderer.material.HasProperty("_EmissionColor"))
+        {
+            renderer.material.EnableKeyword("_EMISSION");
+            renderer.material.SetColor("_EmissionColor", potionData.potionColor);
+        }
+    }
+
 
 
 
@@ -174,6 +206,10 @@ public class Potion : MonoBehaviour
         if (isBroken) return;
         isBroken = true;
 
+        // Play break SFX
+        if (audioSource != null && breakSound != null)
+            audioSource.PlayOneShot(breakSound, breakVolume);
+
         if (wholeModel != null) wholeModel.SetActive(false);
         if (brokenModel != null) brokenModel.SetActive(true);
 
@@ -182,5 +218,40 @@ public class Potion : MonoBehaviour
 
         if (grabInteractable != null)
             grabInteractable.enabled = false;
+
+        SpawnSplash();
     }
+
+
+    private void SpawnSplash()
+    {
+        if (potionData == null || potionData.floorSplashPrefab == null)
+            return;
+
+        // Raycast down to place splash on surface
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
+        {
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            Vector3 pos = hit.point + hit.normal * 0.01f; // avoid z-fighting
+
+            GameObject splash = Instantiate(potionData.floorSplashPrefab, pos, rot);
+
+            // Color it like the potion
+            Renderer r = splash.GetComponent<Renderer>();
+            if (r != null && r.material.HasProperty("_Color"))
+                r.material.color = new Color(
+                    potionData.potionColor.r,
+                    potionData.potionColor.g,
+                    potionData.potionColor.b,
+                    0.75f // transparency
+                );
+
+            // Fade & delete after time
+            Destroy(splash, 6f);
+        }
+    }
+
+
+
+
 }

@@ -28,6 +28,9 @@ public class PotionData : ScriptableObject
     public Recipe[] mixRecipes;
     public PotionData defaultMixResult;
 
+    public GameObject floorSplashPrefab;
+
+
     [System.Serializable]
     public struct Recipe
     {
