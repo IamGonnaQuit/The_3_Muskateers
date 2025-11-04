@@ -12,9 +12,12 @@ public class PotionData : ScriptableObject
     public string potionDescription;
 
     [Header("Visual")]
-    public Material potionMaterial;      // <-- make sure this exists
+    public Material potionMaterial;
     public Color potionColor = Color.white;
-    public GameObject potionPrefab;      // for future 3D preview
+
+    [Header("Prefabs")]
+    public GameObject wholePotionPrefab;
+    public GameObject brokenPotionPrefab;
 
     [Header("Mixing Recipes")]
     public Recipe[] mixRecipes;
