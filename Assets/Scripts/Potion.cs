@@ -19,9 +19,9 @@ public class Potion : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     private static readonly int BaseColorId = Shader.PropertyToID("_BaseColor");
 
+    // --- Breakable potion features ---
     private bool isBroken = false;
     public float breakForce = 1.5f; // tweak based on VR physics strength
-
 
     private void Awake()
     {
@@ -44,7 +44,6 @@ public class Potion : MonoBehaviour
         }
     }
 
-    // In case of domain reload or disable we unsubscribe
     private void OnDisable()
     {
         if (Application.isPlaying && grabInteractable != null)
@@ -104,14 +103,20 @@ public class Potion : MonoBehaviour
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (potionData != null)
+        {
+            // Show both PotionInfoUI and PotionNameUI if needed
+            PotionInfoUI.Instance?.ShowPotionInfo(potionData, args.interactorObject as XRBaseInteractor);
             PotionNameUI.Instance?.ShowPotionName(potionData.potionName, args.interactorObject as XRBaseInteractor);
+        }
     }
 
     private void OnRelease(SelectExitEventArgs args)
     {
+        PotionInfoUI.Instance?.HidePotionInfo(args.interactorObject as XRBaseInteractor);
         PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
     }
 
+    // --- Breakable potion ---
     private void OnCollisionEnter(Collision collision)
     {
         if (isBroken || !Application.isPlaying) return;
@@ -126,7 +131,7 @@ public class Potion : MonoBehaviour
     {
         isBroken = true;
 
-        // Spawn broken version
+        // Spawn broken version if any
         if (potionData.brokenPotionPrefab != null)
         {
             Instantiate(
@@ -139,8 +144,4 @@ public class Potion : MonoBehaviour
         // Destroy this one
         Destroy(gameObject);
     }
-
-
 }
-
-
