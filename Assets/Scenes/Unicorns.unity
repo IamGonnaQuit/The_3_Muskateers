@@ -456,6 +456,10 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1819795629}
+    - target: {fileID: 453088941841700988, guid: bcce471c153dd2d4ba0a28ddb0f4ab03, type: 3}
+      propertyPath: breakSpeedThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 924935104886324478, guid: bcce471c153dd2d4ba0a28ddb0f4ab03, type: 3}
       propertyPath: m_Name
       value: Anti Grav Pull
@@ -4244,7 +4248,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7492019434579847821, guid: d707f9cd93ef71045b18dd8edfeb62f6, type: 3}
 --- !u!4 &1250303114 stripped

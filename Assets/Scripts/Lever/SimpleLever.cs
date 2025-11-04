@@ -5,12 +5,13 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class SimpleLever : MonoBehaviour
 {
     [Header("References")]
-    public Transform leverRoot;     // rotates
-    public Transform leverHandle;   // the grabbable part
+    public Transform leverRoot;      // The pivot that rotates
+    public Transform leverHandle;    // The XRGrabInteractable handle
 
     [Header("Rotation")]
-    public float minAngle = -45f;
-    public float maxAngle = 45f;
+    public float minAngle = -45f;    // Up position
+    public float maxAngle = 45f;     // Down position
+    public bool snapToEnds = true;   // Snap lever to min/max on release
 
     private XRGrabInteractable grab;
     private bool isGrabbed = false;
@@ -39,16 +40,26 @@ public class SimpleLever : MonoBehaviour
     private void OnRelease(SelectExitEventArgs args)
     {
         isGrabbed = false;
+
+        if (snapToEnds)
+        {
+            // Snap lever to closest end
+            float angle = leverRoot.localEulerAngles.z;
+            angle = (angle > 180) ? angle - 360 : angle; // convert to -180..180
+            float targetAngle = Mathf.Abs(angle - minAngle) < Mathf.Abs(angle - maxAngle) ? minAngle : maxAngle;
+            leverRoot.localRotation = initialRotation * Quaternion.Euler(0f, 0f, targetAngle);
+        }
     }
 
     private void Update()
     {
         if (!isGrabbed) return;
 
-        // Simple lever rotation based on handle local rotation
-        Vector3 localEuler = leverHandle.localEulerAngles;
-        float z = Mathf.Clamp(localEuler.z, minAngle, maxAngle);
+        // Rotate lever based on handle local rotation
+        float handleZ = leverHandle.localEulerAngles.z;
+        handleZ = (handleZ > 180) ? handleZ - 360 : handleZ; // convert to -180..180
+        handleZ = Mathf.Clamp(handleZ, minAngle, maxAngle);
 
-        leverRoot.localRotation = initialRotation * Quaternion.Euler(0f, 0f, z);
+        leverRoot.localRotation = initialRotation * Quaternion.Euler(0f, 0f, handleZ);
     }
 }

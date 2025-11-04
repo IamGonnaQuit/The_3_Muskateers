@@ -19,7 +19,7 @@ public class Potion : MonoBehaviour
     public Renderer liquidRenderer;
 
     [Header("Break Settings")]
-    public float breakSpeedThreshold = 1f;
+    public float breakSpeedThreshold = 0.01f;
     public Rigidbody potionRigidbody;
 
     private XRGrabInteractable grabInteractable;
