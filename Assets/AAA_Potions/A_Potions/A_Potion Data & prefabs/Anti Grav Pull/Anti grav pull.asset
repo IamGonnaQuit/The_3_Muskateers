@@ -23,4 +23,4 @@ MonoBehaviour:
   brokenPotionPrefab: {fileID: 0}
   mixRecipes: []
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
-  floorSplashPrefab: {fileID: 5990328018948177263, guid: b051a459ea928d9418bbcbe6acb8f408, type: 3}
+  floorSplashPrefab: {fileID: 2865045135640855570, guid: e9aebe7b880345644966b11d49f6ae5e, type: 3}
