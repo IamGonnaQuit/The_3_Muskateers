@@ -40,7 +40,7 @@ public class BasePotionManager : MonoBehaviour
             grab.enabled = true;
         }
 
-        // --- Optional: reapply potion material/color ---
+        // --- Reapply potion material/color (OLD)---
         Potion potionScript = newPotion.GetComponent<Potion>();
         if (potionScript != null)
         {

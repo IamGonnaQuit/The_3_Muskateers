@@ -1650,7 +1650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &785140499
 Transform:
   m_ObjectHideFlags: 0
@@ -1801,6 +1801,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0e097c5e69b41c49975991370cbe0e8, type: 3}
+--- !u!1 &883669696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7626844063616149549, guid: 00498f598bd2a1d4ba698d0a05e8d0c6, type: 3}
+  m_PrefabInstance: {fileID: 1513427060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &897321487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6216461249860466542, guid: f125b3413604492428b86d6c70bae33c, type: 3}
@@ -4166,11 +4171,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 077fc7b59f7072d48833135f62127d5d, type: 3}
---- !u!1 &2018703660 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7626844063616149549, guid: 077fc7b59f7072d48833135f62127d5d, type: 3}
-  m_PrefabInstance: {fileID: 1982865069}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2018703665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4883504183654845112, guid: 077fc7b59f7072d48833135f62127d5d, type: 3}
@@ -4395,6 +4395,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 785140499}
     m_Modifications:
+    - target: {fileID: 3432765030092907753, guid: 4413e2eb78547304fa571386fa8cc3a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4506674681806349111, guid: 4413e2eb78547304fa571386fa8cc3a9, type: 3}
       propertyPath: m_Name
       value: Purple Potion
@@ -4568,7 +4572,7 @@ MonoBehaviour:
   inputSocketA: {fileID: 1882330393}
   inputSocketB: {fileID: 1047982486}
   outputSpawnPoint: {fileID: 1286625314}
-  potionPrefab: {fileID: 2018703660}
+  potionPrefab: {fileID: 883669696}
 --- !u!23 &974584544324466335
 MeshRenderer:
   m_ObjectHideFlags: 0

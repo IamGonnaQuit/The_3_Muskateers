@@ -16,4 +16,4 @@ MonoBehaviour:
   potionColor: {r: 0.17453715, g: 0.72327036, b: 0.14783823, a: 1}
   potionMaterial: {fileID: 2100000, guid: 0d81c0d2a1cb0ef41917a6e9f0d17828, type: 2}
   mixRecipes: []
-  defaultMixResult: {fileID: 0}
+  defaultMixResult: {fileID: 11400000, guid: f2d1c137c3329cc4bb165469719adea1, type: 2}

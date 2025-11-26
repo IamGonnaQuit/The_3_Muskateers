@@ -3,7 +3,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-[ExecuteAlways] // makes it work in edit mode
+[ExecuteAlways]
 public class Potion : MonoBehaviour
 {
     [Header("Potion Data")]
@@ -16,10 +16,8 @@ public class Potion : MonoBehaviour
 
     private void Awake()
     {
-        // Try to get the XRGrabInteractable on this object
         grabInteractable = GetComponent<XRGrabInteractable>();
 
-        // Only hook into events at runtime
         if (Application.isPlaying && grabInteractable != null)
         {
             grabInteractable.selectEntered.AddListener(OnGrab);
@@ -29,7 +27,6 @@ public class Potion : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Clean up event listeners
         if (grabInteractable != null)
         {
             grabInteractable.selectEntered.RemoveListener(OnGrab);
@@ -39,7 +36,6 @@ public class Potion : MonoBehaviour
 
     private void Start()
     {
-        // Still run at runtime
         if (Application.isPlaying)
             ApplyMaterial();
     }
@@ -47,7 +43,6 @@ public class Potion : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        // Runs in the editor whenever you change something in the inspector
         if (!Application.isPlaying)
             ApplyMaterial();
     }
@@ -75,7 +70,7 @@ public class Potion : MonoBehaviour
         }
     }
 
-    // --- XR Event Handlers ---
+    /// --- XR Event Handlers ---
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (potionData != null)
