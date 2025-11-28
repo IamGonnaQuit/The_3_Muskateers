@@ -28,4 +28,4 @@ MonoBehaviour:
   - otherPotion: {fileID: 11400000, guid: 5924e6511de39f84bad13012b34f109a, type: 2}
     resultPotion: {fileID: 11400000, guid: a40a55ce586688c439b545c0b9b40295, type: 2}
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
-  floorSplashPrefab: {fileID: 0}
+  floorSplashPrefab: {fileID: 2865045135640855570, guid: e9aebe7b880345644966b11d49f6ae5e, type: 3}
