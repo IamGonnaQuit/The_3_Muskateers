@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821356fe754e97f4dbb69a1ffc5e2127, type: 3}
-  m_Name: Anti grav pull
+  m_Name: Potent bomb
   m_EditorClassIdentifier: 
-  potionName: Anti gravity pull
+  potionName: Potent bomb
   potionTags:
   - {fileID: 11400000, guid: 2079b7d74aa800548a5735312b14995b, type: 2}
-  - {fileID: 11400000, guid: 5c7e44e28b3bf464eb737d6d37247944, type: 2}
+  - {fileID: 11400000, guid: 96f46fe680727ff41807dd9e183b68c1, type: 2}
   potionDescription: 
-  wholePotionPrefab: {fileID: 2614343348953957147, guid: bae012676c5c564448589657fcd45f99, type: 3}
-  brokenPotionPrefab: {fileID: 3631156867499704766, guid: 63b141dfc05a22b4dadf1dc26778752a, type: 3}
+  potionMaterial: {fileID: 2100000, guid: 4838d3ab3a0b9dc4d809e0662a80ca9d, type: 2}
+  potionColor: {r: 0.80518055, g: 0.8553459, b: 0, a: 1}
+  wholePotionPrefab: {fileID: 7290581253874690997, guid: e1379ea9b4b6a4f488641a9f8334ac09, type: 3}
+  brokenPotionPrefab: {fileID: 919132149155446097, guid: 432c05f511be13e47bde18ae5d5a632c, type: 3}
   mixRecipes: []
   defaultMixResult: {fileID: 11400000, guid: ed96efdac82a1c842acc880d2c93f328, type: 2}
+  floorSplashPrefab: {fileID: 0}
