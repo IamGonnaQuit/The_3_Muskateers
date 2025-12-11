@@ -17,14 +17,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1daacf11ec2aada4bbfa95a19b577954, type: 2}
   - {fileID: 11400000, guid: e49a4cf0cead38747a4b772b769d8480, type: 2}
   potionDescription: Contained warth of wind
-  potionMaterial: {fileID: 2100000, guid: b056ba1fd6501f449adb0f42d8d98902, type: 2}
-  potionColor: {r: 0.8553459, g: 0.854126, b: 0.7558245, a: 1}
-  wholePotionPrefab: {fileID: 4563589112315941502, guid: d06b03fb02eca6641a72ebcc96275f5b, type: 3}
-  brokenPotionPrefab: {fileID: 919132149155446097, guid: 84acacd70db27a3438127d049b6feb53, type: 3}
+  wholePotionPrefab: {fileID: 8752123118046702340, guid: 683c6eec98788214692aa9b099c21562, type: 3}
+  brokenPotionPrefab: {fileID: 3490163914236798709, guid: 20489e3d618b7fa4c91f4f1847bcd41f, type: 3}
   mixRecipes:
   - otherPotion: {fileID: 11400000, guid: 2fd0be470f0a0ca4f98eeb5a61b783c7, type: 2}
     resultPotion: {fileID: 11400000, guid: aad924f45b81eeb4e8901ec920ff4ba2, type: 2}
   - otherPotion: {fileID: 11400000, guid: 5924e6511de39f84bad13012b34f109a, type: 2}
     resultPotion: {fileID: 11400000, guid: 73ce875f6a02f174285f4acb84b9111a, type: 2}
   defaultMixResult: {fileID: 11400000}
-  floorSplashPrefab: {fileID: 0}

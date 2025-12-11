@@ -11,29 +11,21 @@ public class Potion : MonoBehaviour
     public PotionData potionData;
 
     [Header("Potion Models")]
-    public GameObject wholeModel;  // intact model
-    public GameObject brokenModel; // broken/shattered model (disabled initially)
-
-    [Header("Liquid Renderer")]
-    [Tooltip("Renderer of the liquid mesh inside the whole potion model")]
-    public Renderer liquidRenderer;
+    public GameObject wholeModel;   // intact model
+    public GameObject brokenModel;  // shattered model
 
     [Header("Break Settings")]
     public float breakSpeedThreshold = 0.01f;
     public Rigidbody potionRigidbody;
 
-    private XRGrabInteractable grabInteractable;
-    private bool isBroken = false;
-
-    [Header("Visual Effects")]
-    public ParticleSystem potionParticles;
-    public bool useColorForParticles = true;
-
-    [Header("Audio")]
+    [Header("Visual / Audio")]
+    public ParticleSystem potionParticles; // optional, just for visuals
     public AudioSource audioSource;
     public AudioClip breakSound;
     public float breakVolume = 1f;
 
+    private XRGrabInteractable grabInteractable;
+    private bool isBroken = false;
 
     private void Awake()
     {
@@ -47,9 +39,6 @@ public class Potion : MonoBehaviour
             grabInteractable.selectEntered.AddListener(OnGrab);
             grabInteractable.selectExited.AddListener(OnRelease);
         }
-
-        // Assign material from PotionData
-        ApplyMaterial();
     }
 
     private void OnDestroy()
@@ -70,108 +59,7 @@ public class Potion : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        ApplyMaterial();
-    }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        ApplyMaterial();
-    }
-#endif
-
-    /// <summary>
-    /// Public method to assign the liquid material from the PotionData and set color/emission.
-    /// Safe to call from other scripts. Uses sharedMaterial in editor (no leak),
-    /// and creates a runtime instance (renderer.material) when playing so colors don't affect other objects.
-    /// </summary>
-    public void ApplyMaterial()
-    {
-        if (potionData == null || liquidRenderer == null)
-            return;
-
-#if UNITY_EDITOR
-        // In edit mode (including when working with prefab assets), assign sharedMaterial so we don't instantiate materials
-        if (!Application.isPlaying)
-        {
-            if (potionData.potionMaterial != null)
-                liquidRenderer.sharedMaterial = potionData.potionMaterial;
-
-            var shared = liquidRenderer.sharedMaterial;
-            if (shared != null)
-            {
-                // Base color
-                if (shared.HasProperty("_BaseColor"))
-                    shared.SetColor("_BaseColor", potionData.potionColor);
-                else if (shared.HasProperty("_Color"))
-                    shared.SetColor("_Color", potionData.potionColor);
-
-                // Emission
-                if (shared.HasProperty("_EmissionColor"))
-                {
-                    shared.EnableKeyword("_EMISSION");
-                    shared.SetColor("_EmissionColor", potionData.potionColor);
-                }
-            }
-
-            return;
-        }
-#endif
-
-        // Runtime: assign a material instance so changing color won't affect other renderers that share the same asset
-        if (potionData.potionMaterial != null)
-            liquidRenderer.material = potionData.potionMaterial;
-        else
-            liquidRenderer.material = liquidRenderer.sharedMaterial; // fallback
-
-        var mat = liquidRenderer.material;
-        if (mat == null) return;
-
-        // Base color
-        if (mat.HasProperty("_BaseColor"))
-            mat.SetColor("_BaseColor", potionData.potionColor);
-        else if (mat.HasProperty("_Color"))
-            mat.SetColor("_Color", potionData.potionColor);
-
-        // Emission
-        if (mat.HasProperty("_EmissionColor"))
-        {
-            mat.EnableKeyword("_EMISSION");
-            mat.SetColor("_EmissionColor", potionData.potionColor);
-        }
-
-        // Match particle color
-        ApplyParticleColor();
-
-    }
-
-    private void ApplyParticleColor()
-    {
-        if (!useColorForParticles || potionParticles == null || potionData == null)
-            return;
-
-        var main = potionParticles.main;
-        main.startColor = potionData.potionColor;
-
-        // Optional: overbright for magical glow look
-        var emission = potionParticles.emission;
-        emission.rateOverTime = 10f;
-
-        // Set particle material emission if it exists
-        var renderer = potionParticles.GetComponent<ParticleSystemRenderer>();
-        if (renderer != null && renderer.material != null && renderer.material.HasProperty("_EmissionColor"))
-        {
-            renderer.material.EnableKeyword("_EMISSION");
-            renderer.material.SetColor("_EmissionColor", potionData.potionColor);
-        }
-    }
-
-
-
-
-    // --- XR Grab Events ---
+    // XR Interaction events
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (potionData != null)
@@ -187,7 +75,7 @@ public class Potion : MonoBehaviour
         PotionNameUI.Instance?.ClearText(args.interactorObject as XRBaseInteractor);
     }
 
-    // --- Break logic ---
+    // Break logic
     private void OnCollisionEnter(Collision collision)
     {
         if (isBroken || !Application.isPlaying) return;
@@ -198,15 +86,11 @@ public class Potion : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Switch from whole to broken model and preserve Rigidbody velocity.
-    /// </summary>
     public void BreakPotion()
     {
         if (isBroken) return;
         isBroken = true;
 
-        // Play break SFX
         if (audioSource != null && breakSound != null)
             audioSource.PlayOneShot(breakSound, breakVolume);
 
@@ -218,40 +102,5 @@ public class Potion : MonoBehaviour
 
         if (grabInteractable != null)
             grabInteractable.enabled = false;
-
-        SpawnSplash();
     }
-
-
-    private void SpawnSplash()
-    {
-        if (potionData == null || potionData.floorSplashPrefab == null)
-            return;
-
-        // Raycast down to place splash on surface
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 2f))
-        {
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            Vector3 pos = hit.point + hit.normal * 0.01f; // avoid z-fighting
-
-            GameObject splash = Instantiate(potionData.floorSplashPrefab, pos, rot);
-
-            // Color it like the potion
-            Renderer r = splash.GetComponent<Renderer>();
-            if (r != null && r.material.HasProperty("_Color"))
-                r.material.color = new Color(
-                    potionData.potionColor.r,
-                    potionData.potionColor.g,
-                    potionData.potionColor.b,
-                    0.75f // transparency
-                );
-
-            // Fade & delete after time
-            Destroy(splash, 6f);
-        }
-    }
-
-
-
-
 }

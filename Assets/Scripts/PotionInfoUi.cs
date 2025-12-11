@@ -42,14 +42,14 @@ public class PotionInfoUI : MonoBehaviour
             if (leftHandPanel != null) leftHandPanel.SetActive(true);
             if (leftHandTitle != null) leftHandTitle.text = data.potionName;
             if (leftHandDescription != null) leftHandDescription.text = data.potionDescription;
-            if (leftColorSwatch != null) leftColorSwatch.material.color = data.potionColor;
+            // Color swatch no longer used – leftColorSwatch ignored
         }
         else
         {
             if (rightHandPanel != null) rightHandPanel.SetActive(true);
             if (rightHandTitle != null) rightHandTitle.text = data.potionName;
             if (rightHandDescription != null) rightHandDescription.text = data.potionDescription;
-            if (rightColorSwatch != null) rightColorSwatch.material.color = data.potionColor;
+            // Color swatch no longer used – rightColorSwatch ignored
         }
     }
 

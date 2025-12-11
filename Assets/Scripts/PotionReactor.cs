@@ -62,7 +62,6 @@ public class PotionReactor : MonoBehaviour
             return;
         }
 
-        // Only objects tagged as Potion
         if (!targetA.CompareTag("Potion") || !targetB.CompareTag("Potion"))
         {
             Debug.Log("One or both objects are not potions");
@@ -85,7 +84,6 @@ public class PotionReactor : MonoBehaviour
 
         Debug.Log($"Attempting to mix: {potionA.potionData.potionName} + {potionB.potionData.potionName}");
 
-        // --- Check recipes ---
         PotionData resultData = FindMixResult(potionA.potionData, potionB.potionData);
 
         if (resultData == null)
@@ -96,26 +94,21 @@ public class PotionReactor : MonoBehaviour
 
         Debug.Log($"Recipe found! Result: {resultData.potionName}");
 
-        // Spawn the resulting potion
         SpawnResultPotion(resultData);
 
-        // Destroy / respawn input potions
         DestroyInputPotion(targetA.gameObject, inputSocketA);
         DestroyInputPotion(targetB.gameObject, inputSocketB);
     }
 
     private PotionData FindMixResult(PotionData dataA, PotionData dataB)
     {
-        // Check both directions since mixing should be order-independent
         PotionData result = dataA.GetMixResult(dataB);
 
-        // If no result or it's the default, check the reverse
         if (result == null || result == dataA.defaultMixResult)
         {
             result = dataB.GetMixResult(dataA);
         }
 
-        // If still no valid result or it's the other potion's default, return null
         if (result == null || result == dataB.defaultMixResult)
         {
             return null;
@@ -141,12 +134,11 @@ public class PotionReactor : MonoBehaviour
         GameObject newPotion = Instantiate(resultData.wholePotionPrefab, outputSpawnPoint.position, outputSpawnPoint.rotation);
         Debug.Log($"Spawned result potion: {resultData.potionName}");
 
-        // Assign PotionData to the spawned object
         Potion potion = newPotion.GetComponent<Potion>();
         if (potion != null)
         {
             potion.potionData = resultData;
-            potion.ApplyMaterial();
+            // No ApplyMaterial needed – prefab handles visuals.
         }
 
         hasSpawnedResult = true;
@@ -166,7 +158,6 @@ public class PotionReactor : MonoBehaviour
             );
         }
 
-        // Release from socket if necessary
         if (socket.hasSelection)
         {
             var interactable = socket.GetOldestInteractableSelected();

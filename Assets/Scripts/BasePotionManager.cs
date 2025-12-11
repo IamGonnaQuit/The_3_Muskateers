@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class BasePotionManager : MonoBehaviour
@@ -40,11 +39,6 @@ public class BasePotionManager : MonoBehaviour
             grab.enabled = true;
         }
 
-        // --- Optional: reapply potion material/color ---
-        Potion potionScript = newPotion.GetComponent<Potion>();
-        if (potionScript != null)
-        {
-            potionScript.ApplyMaterial();
-        }
+        // No more ApplyMaterial here – visuals are defined per prefab now.
     }
 }

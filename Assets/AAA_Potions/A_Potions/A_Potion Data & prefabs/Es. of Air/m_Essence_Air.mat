@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_Liquid_Template
+  m_Name: m_Essence_Air
   m_Shader: {fileID: -6465566751694194690, guid: cb5e961c5ef50a6448137af0889ba60d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -100,7 +100,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _Epsilon: 0.1
-    - _Fill: 0.48
+    - _Fill: 0.35
     - _Float: 1
     - _Float_1: 0.5
     - _Fresnel_Power: 5.62
@@ -130,10 +130,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Color: {r: 0.9254902, g: 0.7381684, b: 0.121568635, a: 0}
-    - _LiquidColor: {r: 0.7216981, g: 0.10553132, b: 0.10553132, a: 0}
+    - _Fresnel_Color: {r: 0.7497775, g: 0.92167556, b: 0.9575472, a: 0}
+    - _LiquidColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 0.8443396, g: 0.35856673, b: 0.20311941, a: 0}
+    - _SurfaceColor: {r: 0.4669811, g: 0.4669811, b: 0.4669811, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3668941062368877867
