@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 5078598800221604952}
   - component: {fileID: 2053406181945889156}
   - component: {fileID: 1079091210033546687}
+  - component: {fileID: 5078598800221604953}
   m_Layer: 0
   m_Name: Liquid
   m_TagString: Untagged
@@ -1211,7 +1212,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3be4ceb9abd4a5d4980aa0f06e2a02fc, type: 2}
+  - {fileID: 2100000, guid: 309aa2fe43a0d2342b63ac8c5d600a89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1300,6 +1301,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8052800319366383610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5078598800221604953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564133475144556268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e41dd45020f4b42b3300fc46199794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxWobble: 0.03
+  WobbleSpeed: 2
+  Recovery: 1
 --- !u!64 &5185798385751884036
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1591,15 +1607,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7244774014970502464}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.809, y: 0, z: -3.015}
+  m_LocalRotation: {x: -0, y: -0, z: -0.06257, w: 0.9980406}
+  m_LocalPosition: {x: 3.7987509, y: 0.0006420836, z: -3.015}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 590519610671199968}
   - {fileID: 5078598800221604952}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -727.175}
 --- !u!4 &8077330734318863885
 Transform:
   m_ObjectHideFlags: 0
